@@ -3,7 +3,7 @@
 #  *IW8cine*
 ### ⚙️ A prototype cinematic mod for Call of Duty®: Modern Warfare (2019)
 
-<img  src="https://img.shields.io/badge/IN%20DEVELOPMENT-1995ff?style=flat-square">　<img  src="https://img.shields.io/badge/Latest%20release-soon(tm)-1995ff?style=flat-square">　<a  href="https://discord.gg/wgRJDJJ"><img  src="https://img.shields.io/discord/617736623412740146?label=Join%20us%20on%20Discord&style=flat-square&color=1995ff"></a>
+<img src="https://img.shields.io/badge/IN%20DEVELOPMENT-1995ff?style=flat-square">　<a href="https://github.com/sortileges/iw8cine/releases"><img src="https://img.shields.io/badge/Latest%20release-PRERELEASE-1995ff?style=flat-square"></a>　<a href="https://discord.gg/wgRJDJJ"><img src="https://img.shields.io/discord/617736623412740146?label=Join%20us%20on%20Discord&style=flat-square&color=1995ff"></a>
 <br/><br/>
 
 Designed for video editors to create cinematics shots on **Call of Duty®: Modern Warfare (2019)**.
@@ -18,7 +18,9 @@ In order to use this, you will need a build of Call of Duty®: Modern Warfare th
 
 <br/><br/>
 ## Compiling & Installation
-Since the mod is still in development, you will need to compile the script yourself. A pre-compiled file will come at a later date. You can do so by using [Xensik's GSC tool](https://github.com/xensik/gsc-tool). The usage of this CLI tool is very-well explained in its README if you need further instructions or information.
+Since the mod is still in development, you will need to compile the script yourself if you want all the latest features. A pre-compiled script from the very first commit is available [here](https://github.com/sortileges/iw8cine/releases/latest). 
+
+You can compile the script by using [Xensik's GSC tool](https://github.com/xensik/gsc-tool). The usage of this CLI tool is very-well explained in its README if you need further instructions or information.
 
 As a very brief rundown, you can compile the script by using the following command in your terminal, provided you have GSC tool downloaded and the script.gsc file in the same directory:
 
