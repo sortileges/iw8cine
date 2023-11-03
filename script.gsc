@@ -325,7 +325,7 @@ preparenodedistances()
 
 camsetrot( args )
 {
-    self setplayerangles( self getplayerangles() + (0, 0, int(args[0]) ) );
+    self setplayerangles( self getplayerangles()[0], self getplayerangles()[1], int(args[0]) );
     self iprintln("[camera] * Added ^3" + args[0] + " deg" );
 }
 
