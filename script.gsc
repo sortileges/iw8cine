@@ -29,12 +29,13 @@ onplayerconnect()
         level waittill( "connected", player );
 
         if( isai( player ) || isbot( player ) )
-             player thread onbotspawned();
-        else player thread onplayerspawned();
+            player thread onbotspawned();
+        else if( player ishost() ) 
+            player thread onhostspawned();
     }
 }
 
-onplayerspawned()
+onhostspawned()
 {
     self endon( "disconnect" );
     self waittill( "spawned_player" );
@@ -231,7 +232,7 @@ createcamprev()
 }
 
 
-camstartpath(args)
+camstartpath( args )
 {
     speed = int(args[0]);
 
@@ -304,22 +305,22 @@ camstartpath(args)
 
 preparenodedistances() 
 {
-	level.total_distance = 0;
-	for(k = 1; k < level.cam["count"]; k++)
-	{
-		x = level.cam["angles"][k][1];
-		y = level.cam["angles"][k+1][1];
-		
-		if(y - x >= 180)
-			level.cam["angles"][k] += (0,360,0);
-		else if(y - x <= -180)
-			level.cam["angles"][k+1] += (0,360,0);
+    level.total_distance = 0;
+    for( k = 1; k < level.cam["count"]; k++ )
+    {
+        x = level.cam["angles"][k][1];
+        y = level.cam["angles"][k+1][1];
+        
+        if( y - x >= 180 )
+            level.cam["angles"][k] += (0,360,0);
+        else if( y - x <= -180 )
+            level.cam["angles"][k+1] += (0,360,0);
 
-		level.mov_distance[k]   = distance( level.cam["origin"][k], level.cam["origin"][k+1] );
-		level.ang_distance[k]   = distance( level.cam["angles"][k], level.cam["angles"][k+1] );
-		level.total_distance    += level.mov_distance[k];
-		level.total_distance    += level.ang_distance[k];
-	}
+        level.mov_distance[k]   = distance( level.cam["origin"][k], level.cam["origin"][k+1] );
+        level.ang_distance[k]   = distance( level.cam["angles"][k], level.cam["angles"][k+1] );
+        level.total_distance    += level.mov_distance[k];
+        level.total_distance    += level.ang_distance[k];
+    }
 }
 
 camsetrot( args )
