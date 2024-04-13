@@ -3,7 +3,7 @@
  *      Main file
  */
 
-init()
+main()
 {
     level.cam = [];
     level.cam["type"] = "bezier";
@@ -72,7 +72,6 @@ registercommands()
     self thread createcommand( "mvm_bot_freeze","Freeze all bots",  ::botfreeze );      // 1 = freeze, 0 = unfreeze
     self thread createcommand( "mvm_bot_kill",  "Kill bot by name", ::botkill );        // name of bot
     self thread createcommand( "mvm_bot_move",  "Move to bot self", ::botmove );        // name of bot
-    self thread createcommand( "mvm_bot_spawn", "Spawns a bot",     ::botspawn );       // 1
     self thread createcommand( "mvm_cam_mode",  "Change cam mode",  ::camsetmode );     // linear/bezier
     self thread createcommand( "mvm_cam_rot",   "Camera rotation",  ::camsetrot );      // rotation in degrees
     self thread createcommand( "mvm_cam_save",  "Save camera node", ::camsavenode );    // node number (starting from 1)
@@ -124,12 +123,6 @@ botfreeze( args )
         if( isbot( player ) || isai( player ) )
             player freezecontrols( level.botfreeze );
     }
-}
-
-// Need to label bots.gsc and see what's up
-botspawn()
-{
-    level thread scripts\mp\bots\bots::spawn_bots( 1, "allies", undefined, undefined, "spawned_allies", "recruit" );
 }
 
 botmove( args )
@@ -214,8 +207,8 @@ createcamprev()
             {
                 for(z = 0; z < 3; z++)
                 {
-                    pos[z] += float( diff( i-1, level.cam["count"]-1) * pow( (1-t), level.cam["count"]-i ) * pow( t, i-1 ) * level.cam["orgpath"][i][z] );
-                    ang[z] += float( diff( i-1, level.cam["count"]-1) * pow( (1-t), level.cam["count"]-i ) * pow( t, i-1 ) * level.cam["angles"][i][z] );
+                    pos[z] += float( binomial( i-1, level.cam["count"]-1) * pow( (1-t), level.cam["count"]-i ) * pow( t, i-1 ) * level.cam["orgpath"][i][z] );
+                    ang[z] += float( binomial( i-1, level.cam["count"]-1) * pow( (1-t), level.cam["count"]-i ) * pow( t, i-1 ) * level.cam["angles"][i][z] );
                 }
             }
 
@@ -284,8 +277,8 @@ camstartpath( args )
             {
                 for( z = 0; z < 3; z++ )
                 {
-                    pos[z] += float( diff( i-1, level.cam["count"]-1) * pow( (1-t), level.cam["count"]-i ) * pow( t, i-1 ) * level.cam["origin"][i][z] );
-                    ang[z] += float( diff( i-1, level.cam["count"]-1) * pow( (1-t), level.cam["count"]-i ) * pow( t, i-1 ) * level.cam["angles"][i][z] );
+                    pos[z] += float( binomial( i-1, level.cam["count"]-1) * pow( (1-t), level.cam["count"]-i ) * pow( t, i-1 ) * level.cam["origin"][i][z] );
+                    ang[z] += float( binomial( i-1, level.cam["count"]-1) * pow( (1-t), level.cam["count"]-i ) * pow( t, i-1 ) * level.cam["angles"][i][z] );
                 }
             }
             camera moveto( (pos[0] ,pos[1], pos[2]), .1, 0, 0 );
@@ -394,12 +387,12 @@ inside_fov( player, target, fov )
     return dot >= cos( fov );
 }
 
-diff( x, y )
+binomial( x, y )
 {
-    return ( fact( y ) / ( fact( x ) * fact( y - x ) ) );
+    return ( factorial( y ) / ( factorial( x ) * factorial( y - x ) ) );
 }
 
-fact( x )
+factorial( x )
 {
     c = 1;
     if( x == 0 ) return 1;
